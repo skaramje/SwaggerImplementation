@@ -9,6 +9,10 @@ app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
+app.get('/', (req, res) => {
+    res.send('Use api-docs to see the API documentation.');
+});
+
 app.get('/restaurants', (req, res) => {
     res.send(restaurants);
 })
@@ -24,4 +28,5 @@ app.delete("/restaurant/:id", (req, res) => {
     res.send("restaurants left:"+JSON.stringify(restaurants));
 })
 
-app.listen(4000, ()=>console.log('Listening on 4000'))
+const port = process.env.PORT || 4000;
+app.listen(port, ()=>console.log(`Listening on port ${port}.`));
